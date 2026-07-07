@@ -6,6 +6,7 @@
 <title>{% block title %}FarmMind AI — Know what to grow, before you grow it{% endblock %}</title>
 <meta name="description" content="FarmMind AI reads your soil, season, and water to recommend crops, project profit, flag risk, and plan rotations — so every planting decision is backed by data.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232F6B3A%22/><path d=%22M16 24 V13 M16 13 C16 9 12 8 9 9 C9 13 12 15 16 13 M16 13 C16 9 20 8 23 9 C23 13 20 15 16 13%22 stroke=%22%23FBFBF6%22 stroke-width=%222.2%22 fill=%22none%22 stroke-linecap=%22round%22/></svg>">
+<!-- ... existing code ... -->
 <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 {% block extra_head %}{% endblock %}
 </head>
@@ -13,21 +14,37 @@
 
 <nav class="nav">
   <div class="nav-row">
-    <a href="{{ url_for('index') }}" class="brand">
-      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="40" height="40" rx="11" fill="#2F6B3A"/>
-        <path d="M20 30 V15.5 M20 15.5 C20 10.5 15 9 11 10.5 C11 16 15 18.5 20 15.5 M20 15.5 C20 10.5 25 9 29 10.5 C29 16 25 18.5 20 15.5"
-          stroke="#FBFBF6" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <a href="{{ url_for('index') }}" class="brand" aria-label="FarmMind AI home">
+      <svg class="brand-mark brand-mark-premium" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="3" y="3" width="42" height="42" rx="14" fill="url(#brandGradient)"/>
+        <path d="M24 35V22" stroke="#FBFBF6" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M24 22C24 15.8 18.5 13.4 13.5 15.2C13.9 21.1 18.4 24.6 24 22Z" stroke="#FBFBF6" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+        <path d="M24 22C24 15.8 29.5 13.4 34.5 15.2C34.1 21.1 29.6 24.6 24 22Z" stroke="#FBFBF6" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+        <circle cx="16" cy="12" r="1.8" fill="#F4CD87"/>
+        <circle cx="32" cy="12" r="1.8" fill="#F4CD87"/>
+        <circle cx="24" cy="9" r="1.8" fill="#8FC6CB"/>
+        <path d="M16 12L24 9L32 12" stroke="rgba(251,251,246,0.55)" stroke-width="1.4"/>
+        <defs>
+          <linearGradient id="brandGradient" x1="6" y1="5" x2="43" y2="45" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#1F7A7A"/>
+            <stop offset="0.45" stop-color="#2F6B3A"/>
+            <stop offset="1" stop-color="#1E4726"/>
+          </linearGradient>
+        </defs>
       </svg>
-      <span class="brand-word">Farm<em>Mind</em></span>
+      <span class="brand-text">
+        <span class="brand-word">Farm<em>Mind</em></span>
+        <span class="brand-ai">AI</span>
+      </span>
     </a>
     <div class="nav-links">
       <a href="{{ url_for('index') }}#how">How it works</a>
-      <a href="{{ url_for('index') }}#features">What it does</a>
-      <a href="{{ url_for('index') }}#analyze">Analyze your field</a>
+      <a href="{{ url_for('index') }}#features">Features</a>
+      <a href="{{ url_for('index') }}#preview">Results preview</a>
+      <a href="{{ url_for('index') }}#analyze">Analyze</a>
     </div>
     <div class="nav-cta">
-      <a href="{{ url_for('index') }}#analyze" class="btn btn-primary">Start analysis</a>
+      <a href="{{ url_for('index') }}#analyze" class="btn btn-primary">Analyze Field</a>
     </div>
   </div>
 </nav>
@@ -41,23 +58,34 @@
     <div class="footer-row">
       <div>
         <a href="{{ url_for('index') }}" class="brand" style="margin-bottom:14px;">
-          <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="40" height="40" rx="11" fill="#2F6B3A"/>
-            <path d="M20 30 V15.5 M20 15.5 C20 10.5 15 9 11 10.5 C11 16 15 18.5 20 15.5 M20 15.5 C20 10.5 25 9 29 10.5 C29 16 25 18.5 20 15.5"
-              stroke="#FBFBF6" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg class="brand-mark brand-mark-premium" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="3" width="42" height="42" rx="14" fill="#2F6B3A"/>
+            <path d="M24 35V22" stroke="#FBFBF6" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M24 22C24 15.8 18.5 13.4 13.5 15.2C13.9 21.1 18.4 24.6 24 22Z" stroke="#FBFBF6" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+            <path d="M24 22C24 15.8 29.5 13.4 34.5 15.2C34.1 21.1 29.6 24.6 24 22Z" stroke="#FBFBF6" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+            <circle cx="16" cy="12" r="1.8" fill="#F4CD87"/>
+            <circle cx="32" cy="12" r="1.8" fill="#F4CD87"/>
+            <circle cx="24" cy="9" r="1.8" fill="#8FC6CB"/>
+            <path d="M16 12L24 9L32 12" stroke="rgba(251,251,246,0.55)" stroke-width="1.4"/>
           </svg>
-          <span class="brand-word">Farm<em>Mind</em></span>
+          <span class="brand-text">
+            <span class="brand-word">Farm<em>Mind</em></span>
+            <span class="brand-ai">AI</span>
+          </span>
         </a>
         <p class="footer-note">A decision-support tool for growers — not a substitute for local agronomic advice. Always weigh recommendations against your own field experience.</p>
       </div>
       <ul class="footer-links">
         <li><a href="{{ url_for('index') }}#how">How it works</a></li>
         <li><a href="{{ url_for('index') }}#features">Features</a></li>
+        <li><a href="{{ url_for('index') }}#preview">Results preview</a></li>
         <li><a href="{{ url_for('index') }}#analyze">Analyze a field</a></li>
       </ul>
     </div>
   </div>
 </footer>
+
+<a class="mobile-sticky-cta" href="{{ url_for('index') }}#analyze">Generate my crop plan</a>
 
 <script src="{{ url_for('static', filename='app.js') }}"></script>
 {% block extra_scripts %}{% endblock %}

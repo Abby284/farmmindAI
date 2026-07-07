@@ -68,11 +68,32 @@
     setPreview("farm_size", `${val("farm_size")} acres`);
     setPreview("goal", selectedText("goal"));
 
+  updateConfidenceMeter();
+
     const tipEl = document.getElementById("preview-tip");
     if (tipEl) {
       const season = val("season");
       tipEl.innerHTML = SEASON_TIPS[season] || SEASON_TIPS.kharif;
     }
+  }
+
+  function updateConfidenceMeter() {
+    let score = 56;
+
+    if (val("rainfall")) score += 14;
+    if (val("temp")) score += 12;
+    if (val("ph") && parseFloat(val("ph")) !== 6.5) score += 6;
+    if (val("farm_size") && parseFloat(val("farm_size")) !== 5) score += 6;
+    if (activePillText("nitrogen")) score += 3;
+    if (activePillText("water")) score += 3;
+
+    score = Math.min(score, 100);
+
+    const value = document.getElementById("confidence-value");
+    const fill = document.getElementById("confidence-fill");
+
+    if (value) value.textContent = `${score}%`;
+    if (fill) fill.style.width = `${score}%`;
   }
 
   function val(id) {

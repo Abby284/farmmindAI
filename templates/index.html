@@ -2,15 +2,21 @@
 {% block content %}
 
 <!-- ============================== HERO ============================== -->
-<section class="hero">
+<section class="hero immersive-hero">
+  <div class="hero-ambient" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">AI crop &amp; farm planning</span>
-      <h1>Know what to grow,<br>before you <span class="accent">grow</span> it.</h1>
-      <p class="lede">FarmMind AI reads your soil, season, and water supply, then scores every crop against your actual field — profit, risk, and soil health included. No guesswork, no generic advice.</p>
+      <span class="eyebrow">AI crop intelligence for real fields</span>
+      <h1>Plant with confidence,<br>not <span class="accent">guesswork</span>.</h1>
+      <p class="lede">FarmMind AI turns soil, season, water, pH, nitrogen, and farm goals into a ranked crop plan — with profit outlook, risk signals, and rotation guidance before the first seed goes in.</p>
       <div class="hero-actions">
-        <a href="#analyze" class="btn btn-primary btn-lg">Analyze my field</a>
-        <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
+        <a href="#analyze" class="btn btn-primary btn-lg">Generate my crop plan</a>
+        <a href="#preview" class="btn btn-ghost btn-lg">Preview results</a>
+      </div>
+      <div class="trust-strip">
+        <span>Under 60 seconds</span>
+        <span>No account required</span>
+        <span>Transparent scoring</span>
       </div>
       <div class="hero-meta">
         <div class="hero-stat"><b>14</b><span>Crops modeled</span></div>
@@ -19,8 +25,13 @@
       </div>
     </div>
 
-    <div class="horizon-stage" aria-hidden="true">
+    <div class="horizon-stage premium-horizon" aria-hidden="true">
+      <div class="sun-orb"></div>
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
       <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <path class="field-line line-a" d="M-20 330 C90 285 210 285 420 330" />
+        <path class="field-line line-b" d="M-20 365 C120 320 260 320 420 365" />
         <path class="sprout-path" d="M200 320 L200 210 C200 170 175 150 145 148 C145 185 168 208 200 210 C200 170 225 150 255 148 C255 185 232 208 200 210" />
         <ellipse class="leaf leaf-1" cx="158" cy="172" rx="17" ry="9" fill="#8FBF7A" transform="rotate(-28 158 172)"/>
         <ellipse class="leaf leaf-2" cx="242" cy="172" rx="17" ry="9" fill="#8FBF7A" transform="rotate(28 242 172)"/>
@@ -29,6 +40,10 @@
       <div class="chip chip-2"><span class="dot" style="background:#1F6F78"></span>pH 6.4</div>
       <div class="chip chip-3"><span class="dot" style="background:#DD9A2E"></span>820mm rainfall</div>
       <div class="chip chip-4"><span class="dot" style="background:#A6472A"></span>Risk: LOW</div>
+      <div class="ai-panel">
+        <span>AI recommendation</span>
+        <strong>Soybean → Wheat → Chickpea</strong>
+      </div>
     </div>
   </div>
 </section>
@@ -113,7 +128,75 @@
     </div>
   </div>
 </section>
+    <!-- ======================== RESULTS PREVIEW ========================== -->
+    <section class="section" id="preview">
+      <div class="wrap">
+        <div class="result-preview-shell">
+          <div class="section-head">
+            <span class="eyebrow">What you get back</span>
+            <h2>A crop decision you can actually defend.</h2>
+            <p class="lede">The analysis does more than name a crop — it explains fit, risk, profit, and what should come next season.</p>
+          </div>
 
+          <div class="result-preview-card">
+            <div class="mock-dashboard">
+              <div class="mock-main-card">
+                <span class="mock-label">Recommended crop</span>
+                <div class="mock-crop-row">
+                  <span class="mock-emoji">🌱</span>
+                  <div>
+                    <h3>Soybean</h3>
+                    <p>84% field match</p>
+                  </div>
+                </div>
+                <div class="mock-score-bar">
+                  <span style="width:84%"></span>
+                </div>
+              </div>
+
+              <div class="mock-grid">
+                <div class="mock-tile">
+                  <span>Risk level</span>
+                  <strong class="risk-low-text">Low</strong>
+                </div>
+                <div class="mock-tile">
+                  <span>Profit outlook</span>
+                  <strong>₹42k net</strong>
+                </div>
+                <div class="mock-tile">
+                  <span>Rotation</span>
+                  <strong>Soy → Wheat → Chickpea</strong>
+                </div>
+                <div class="mock-tile">
+                  <span>Soil health</span>
+                  <strong>Stable</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="preview-benefits">
+              <div>
+                <h3>Transparent scoring</h3>
+                <p>See how soil, season, rainfall, water, pH, nitrogen, and temperature affect every recommendation.</p>
+              </div>
+              <div>
+                <h3>Risk warnings</h3>
+                <p>Know when conditions are near the edge of a crop’s tolerance before committing resources.</p>
+              </div>
+              <div>
+                <h3>Rotation planning</h3>
+                <p>Protect future soil health with a practical three-season sequence.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== PHILOSOPHY ============================= -->
+    <section class="section">
+      <div class="wrap">
+<!-- ... existing code ... -->
 <!-- =========================== PHILOSOPHY ============================= -->
 <section class="section">
   <div class="wrap">
@@ -132,6 +215,12 @@
     <span class="eyebrow">Your field, your data</span>
     <h1>Let's look at your field.</h1>
     <p class="lede">Answer what you can — soil and season matter most. Everything else sharpens the picture.</p>
+  <div class="form-progress">
+          <span class="active">1 Field basics</span>
+          <span>2 Conditions</span>
+          <span>3 Resources</span>
+          <span>4 Goal</span>
+        </div>
   </div>
 </section>
 
@@ -243,16 +332,39 @@
         </div>
 
         <div class="form-submit">
-          <button type="submit" class="btn btn-primary btn-lg">Run the analysis</button>
-          <span class="reassure">Takes a few seconds. Nothing is saved anywhere.</span>
-        </div>
-      </div>
+              <button type="submit" class="btn btn-primary btn-lg">Generate my crop plan</button>
+              <span class="reassure">Takes a few seconds. Nothing is saved anywhere.</span>
+            </div>
+          </div>
 
       <!-- Live preview sidebar -->
       <aside class="preview-card">
         <div class="preview-head">
           <h4>Field profile</h4>
         </div>
+          <!-- ... existing code ... -->
+          <!-- Live preview sidebar -->
+          <aside class="preview-card">
+            <div class="preview-head">
+              <h4>Field profile</h4>
+            </div>
+
+            <div class="confidence-meter">
+              <div class="confidence-top">
+                <span>Analysis confidence</span>
+                <strong id="confidence-value">56%</strong>
+              </div>
+              <div class="confidence-track">
+                <span id="confidence-fill" style="width:56%"></span>
+              </div>
+            </div>
+
+            <div class="preview-mini-horizon">
+              <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 100 L40 55 C40 35 25 26 12 25 C12 45 25 58 40 55 C40 35 55 26 68 25 C68 45 55 58 40 55" stroke="#8FBF7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+<!-- ... existing code ... -->
         <div class="preview-mini-horizon">
           <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
             <path d="M40 100 L40 55 C40 35 25 26 12 25 C12 45 25 58 40 55 C40 35 55 26 68 25 C68 45 55 58 40 55" stroke="#8FBF7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
