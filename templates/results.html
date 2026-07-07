@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% block title %}Your field's analysis — FarmMind AI{% endblock %}
+{% block content %}
+
+<section class="section results-hero">
+  <div class="wrap">
+    <div class="results-topbar">
+      <div class="eyebrow-line">
+        <span class="eyebrow">Analysis complete</span>
+        <h1>Here's what your field can grow.</h1>
+      </div>
+      <a href="{{ url_for('index') }}#analyze" class="btn btn-ghost">Run another analysis</a>
+    </div>
+
+    <!-- Champion card -->
+    <div class="champion-card">
+      <div class="champion-emoji">{{ top.emoji }}</div>
+      <div class="champion-info">
+        <span class="eyebrow" style="color:var(--sun-light);">Top match for your field</span>
+        <h2>{{ top.name }}</h2>
+        <div class="tag-row">
+          <span class="champion-tag">{{ top.duration }}</span>
+          {% for t in top.tags %}<span class="champion-tag">{{ t }}</span>{% endfor %}
+        </div>
+      </div>
+      <div class="champion-score">
+        <div class="num">{{ ranked[0].pct }}%</div>
+        <div class="lbl">Match score</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="overview">Crop rankings</button>
+      <button class="tab-btn" data-tab="soil">Soil health</button>
+      <button class="tab-btn" data-tab="rotation">Rotation plan</button>
+      <button class="tab-btn" data-tab="whatif">What-if lab</button>
+    </div>
+
+    <!-- ===================== OVERVIEW / RANKINGS ===================== -->
+    <div class="tab-panel active" id="panel-overview">
+      <div class="crop-list">
+        {% for r in ranked %}
+        <div class="crop-card" data-crop-card>
+          <div class="crop-card-head" data-crop-toggle>
+            <span class="rank-badge">#{{ loop.index }}</span>
+            <span class="crop-emoji-sm">{{ r.crop.emoji }}</span>
+            <div class="crop-name-col">
+              <h3>{{ r.crop.name }}</h3>
+              <span class="meta">{{ r.crop.duration }} &middot; ₹{{ '{:,}'.format(r.profit.net) }} net on {{ inp.farm_size }} acres</span>
+            </div>
+            <div class="match-badge">
+              <div class="pct">{{ r.pct }}%</div>
+              <div class="match-bar"><div class="match-bar-fill" style="width:{{ r.pct }}%"></div></div>
+            </div>
+            <span class="risk-chip risk-{{ r.risk_level }}">{{ r.risk_level }}</span>
+            <svg class="expand-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <div class="crop-detail">
+            <div class="crop-detail-inner">
+              <div>
+                <div class="score-bars">
+                  {% for name, p in r.params.items() %}
+                  <div class="score-bar-row">
+                    <span class="label">{{ name }}</span>
+                    <div class="score-bar-track"><div class="score-bar-fill" style="width:{{ (p.score / p.max * 100)|round|int }}%"></div></div>
+                    <span class="pct-val">{{ p.score }}/{{ p.max }}</span>
+                  </div>
+                  <div class="score-note">{{ p.note }}</div>
+                  {% endfor %}
+                </div>
+
+                <div class="profit-grid" style="margin-top:24px;">
+                  <div class="profit-cell"><div class="lbl">Gross revenue</div><div class="val">₹{{ '{:,}'.format(r.profit.gross) }}</div></div>
+                  <div class="profit-cell"><div class="lbl">Input cost</div><div class="val">₹{{ '{:,}'.format(r.profit.cost) }}</div></div>
+                  <div class="profit-cell {{ 'positive' if r.profit.net >= 0 else 'negative' }}"><div class="lbl">Net profit</div><div class="val">₹{{ '{:,}'.format(r.profit.net) }}</div></div>
+                  <div class="profit-cell"><div class="lbl">ROI</div><div class="val">{{ r.profit.roi }}%</div></div>
+                </div>
+              </div>
+
+              <div class="side-stats">
+                <div class="stat-block">
+                  <div class="lbl">Best-suited soils</div>
+                  <div class="val" style="font-size:0.92rem; font-weight:600;">{{ r.crop.soils|map('capitalize')|join(', ') }}</div>
+                </div>
+                <div class="stat-block">
+                  <div class="lbl">Risk assessment — {{ r.risk_level }}</div>
+                  {% if r.risk_flags %}
+                  <ul class="risk-flags">
+                    {% for flag in r.risk_flags %}<li>{{ flag }}</li>{% endfor %}
+                  </ul>
+                  {% else %}
+                  <p class="no-risk">No significant risk factors detected for this field profile.</p>
+                  {% endif %}
+                </div>
+                <div class="stat-block">
+                  <div class="lbl">Effect on soil</div>
+                  <div class="val" style="font-size:0.92rem; font-weight:600; text-transform:capitalize;">{{ r.crop.soil_effect }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- ========================== SOIL HEALTH ========================== -->
+    <div class="tab-panel" id="panel-soil">
+      <div class="card">
+        <div class="soil-summary">
+          <div class="soil-gauge">
+            <svg width="132" height="132" viewBox="0 0 132 132">
+              <circle cx="66" cy="66" r="56" stroke="var(--line)" stroke-width="12" fill="none"/>
+              <circle cx="66" cy="66" r="56" stroke="{{ 'var(--green)' if soil_final >= 75 else ('var(--sun)' if soil_final >= 50 else 'var(--clay)') }}"
+                stroke-width="12" fill="none" stroke-linecap="round"
+                stroke-dasharray="351.86" stroke-dashoffset="{{ (351.86 * (1 - soil_final/100))|round(2) }}"/>
+            </svg>
+            <div class="soil-gauge-label"><b>{{ soil_final }}</b><span>Soil health</span></div>
+          </div>
+          <div class="soil-advice-box {{ 'ok' if soil_final >= 75 else ('crit' if soil_final < 50 else '') }}">
+            {{ soil_advice }}
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:22px; font-size:1.15rem;">Projected over the next 4 seasons</h3>
+        <div class="timeline">
+          {% for h in soil_history %}
+          <div class="timeline-item">
+            <div class="timeline-season">{{ h.season_label }}</div>
+            <div class="timeline-line-col">
+              <div class="timeline-dot" style="background:{{ 'var(--green)' if h.status == 'restored' else ('var(--clay)' if h.status == 'depleted' else 'var(--ink-faint)') }}"></div>
+              <div class="timeline-connector"></div>
+            </div>
+            <div class="timeline-content">
+              <h4>{{ h.crop.emoji }} {{ h.crop.name }}</h4>
+              <div class="status-line">
+                <span class="status-{{ h.status }}">Soil {{ h.status }}</span>
+                <span>Health: {{ h.health }}/100</span>
+                <span>pH: {{ h.ph }}{% if h.ph_warn %} ({{ h.ph_warn }}){% endif %}</span>
+                <span>Nitrogen: {{ h.nitrogen|capitalize }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================== ROTATION PLAN ========================== -->
+    <div class="tab-panel" id="panel-rotation">
+      <div class="card">
+        <h3 style="margin-bottom:6px; font-size:1.15rem;">A 3-season sequence for this field</h3>
+        <p class="lede" style="margin-bottom:30px;">Built around your top match, with soil recovery worked in{% if n_fixer %} — like {{ n_fixer.name }}, a nitrogen-fixer that helps repay what heavier crops draw down{% endif %}.</p>
+        <div class="rotation-grid">
+          {% for stage in rotation %}
+          <div class="rotation-card">
+            <span class="season-tag">{{ stage.season_label }}</span>
+            <div class="crop-row">
+              <span class="emoji">{{ stage.crop.emoji }}</span>
+              <h4>{{ stage.crop.name }}</h4>
+            </div>
+            <p>{{ stage.note }}</p>
+            <div class="net">₹{{ '{:,}'.format(stage.net) }} projected net</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ WHAT-IF LAB ============================ -->
+    <div class="tab-panel" id="panel-whatif">
+      <div class="card">
+        <h3 style="margin-bottom:6px; font-size:1.15rem;">Test a change before you make it</h3>
+        <p class="lede" style="margin-bottom:26px;">Pick a scenario to see how match scores shift across your ranked crops.</p>
+        <div class="whatif-scenarios">
+          {% for s in whatif_scenarios %}
+          <button type="button" class="scenario-btn" data-scenario-id="{{ s.id }}">{{ s.label }}</button>
+          {% endfor %}
+        </div>
+        <div class="whatif-panel" id="whatif-panel">
+          <div class="whatif-empty">Choose a scenario above to see the effect on your crop rankings.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-actions">
+      <a href="{{ url_for('index') }}#analyze" class="btn btn-primary">Run another analysis</a>
+      <a href="{{ url_for('index') }}" class="btn btn-ghost">Back to home</a>
+    </div>
+  </div>
+</section>
+
+<script id="results-data" type="application/json">
+{
+  "inp": {{ inp | tojson }},
+  "origRanked": [
+    {% for r in ranked %}{ "pct": {{ r.pct }}, "crop_id": "{{ r.crop.id }}" }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+{% block extra_scripts %}
+<script>document.body.dataset.page = "results";</script>
+{% endblock %}

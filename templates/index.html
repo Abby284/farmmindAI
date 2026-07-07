@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">AI crop &amp; farm planning</span>
+      <h1>Know what to grow,<br>before you <span class="accent">grow</span> it.</h1>
+      <p class="lede">FarmMind AI reads your soil, season, and water supply, then scores every crop against your actual field — profit, risk, and soil health included. No guesswork, no generic advice.</p>
+      <div class="hero-actions">
+        <a href="#analyze" class="btn btn-primary btn-lg">Analyze my field</a>
+        <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-stat"><b>14</b><span>Crops modeled</span></div>
+        <div class="hero-stat"><b>8</b><span>Scoring factors</span></div>
+        <div class="hero-stat"><b>3-season</b><span>Rotation plans</span></div>
+      </div>
+    </div>
+
+    <div class="horizon-stage" aria-hidden="true">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <path class="sprout-path" d="M200 320 L200 210 C200 170 175 150 145 148 C145 185 168 208 200 210 C200 170 225 150 255 148 C255 185 232 208 200 210" />
+        <ellipse class="leaf leaf-1" cx="158" cy="172" rx="17" ry="9" fill="#8FBF7A" transform="rotate(-28 158 172)"/>
+        <ellipse class="leaf leaf-2" cx="242" cy="172" rx="17" ry="9" fill="#8FBF7A" transform="rotate(28 242 172)"/>
+      </svg>
+      <div class="chip chip-1"><span class="dot" style="background:#2F6B3A"></span>84% match — Soybean</div>
+      <div class="chip chip-2"><span class="dot" style="background:#1F6F78"></span>pH 6.4</div>
+      <div class="chip chip-3"><span class="dot" style="background:#DD9A2E"></span>820mm rainfall</div>
+      <div class="chip chip-4"><span class="dot" style="background:#A6472A"></span>Risk: LOW</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== HOW IT WORKS ============================ -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The process</span>
+      <h2>Three steps between you and a decision you can defend.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01 — Tell us the field</span>
+        <h3>Describe what you're working with</h3>
+        <p>Soil type, season, rainfall, temperature, water access — whatever you know. Leave the rest blank; FarmMind AI fills gaps with regional defaults.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02 — The engine scores</span>
+        <h3>Every crop, ranked against your field</h3>
+        <p>14 crops are scored across 8 weighted factors — soil fit, season, rainfall, temperature, pH, water, nitrogen, and your stated goal.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03 — You get a plan</span>
+        <h3>Profit, risk, and a rotation — not just a name</h3>
+        <p>See projected profit, risk flags, a 3-season rotation to protect soil health, and what-if scenarios before you commit a single seed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FEATURES ============================== -->
+<section class="section" id="features" style="background:var(--bg-alt); border-radius:40px;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What FarmMind AI does</span>
+      <h2>One field profile. Six ways to see it clearly.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card tone-green">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12c4-6 12-6 16 0-4 6-12 6-16 0z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>
+        </div>
+        <h3>Match scoring</h3>
+        <p>Every crop gets a transparent percentage — broken down by soil, season, rainfall, temperature, pH, water, and nitrogen fit.</p>
+      </div>
+      <div class="feature-card tone-clay">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 15H4l8-15z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Risk radar</h3>
+        <p>Flags conditions sitting near the edge of a crop's tolerance — before a dry spell or cold snap turns into lost yield.</p>
+      </div>
+      <div class="feature-card tone-sun">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 17l5-6 4 4 5-8 4 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Profit math</h3>
+        <p>Gross revenue, input cost, net return, and ROI — calculated for your exact farm size, not a generic per-acre average.</p>
+      </div>
+      <div class="feature-card tone-water">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Rotation planner</h3>
+        <p>A 3-season sequence built around your top crop — pairing in nitrogen-fixers where your soil needs them most.</p>
+      </div>
+      <div class="feature-card tone-green">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Soil memory</h3>
+        <p>Simulates 4 seasons ahead — tracking pH drift, nitrogen depletion, and overall soil health under your chosen strategy.</p>
+      </div>
+      <div class="feature-card tone-clay">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 3v18M18 3v18M3 9h6M15 9h6M3 15h6M15 15h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>What-if lab</h3>
+        <p>Test irrigation upgrades, better nitrogen, or a wetter season — and see exactly which crops move, and by how much.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== PHILOSOPHY ============================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="philosophy">
+      <blockquote>
+        “The best fertilizer isn't a product — it's the decision made before the seed goes in the ground. We built FarmMind AI to make that decision a little less like a gamble.”
+      </blockquote>
+      <cite>— FarmMind AI, design principle</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FORM ================================ -->
+<section class="section form-hero" id="analyze">
+  <div class="wrap">
+    <span class="eyebrow">Your field, your data</span>
+    <h1>Let's look at your field.</h1>
+    <p class="lede">Answer what you can — soil and season matter most. Everything else sharpens the picture.</p>
+  </div>
+</section>
+
+<section class="section-tight" style="padding-top:0;">
+  <div class="wrap">
+    <form class="form-layout" action="{{ url_for('analyze_route') }}" method="POST" id="farm-form">
+
+      <div class="form-card">
+
+        <!-- 1. Field basics -->
+        <div class="field-group">
+          <div class="field-group-head">
+            <span class="num">1</span><h3>Field basics</h3>
+            <span>Required</span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="soil">Soil type</label>
+              <select id="soil" name="soil" data-preview="soil">
+                {% for s in soils %}
+                <option value="{{ s }}" {% if s == 'loamy' %}selected{% endif %}>{{ s|capitalize }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="season">Growing season</label>
+              <select id="season" name="season" data-preview="season">
+                {% for s in seasons %}
+                <option value="{{ s }}" {% if s == 'kharif' %}selected{% endif %}>{{ season_labels[s] }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Conditions -->
+        <div class="field-group">
+          <div class="field-group-head">
+            <span class="num">2</span><h3>Conditions</h3>
+            <span class="field-optional-badge">Optional, but sharpens the score</span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="rainfall">Expected rainfall (mm)</label>
+              <input type="number" id="rainfall" name="rainfall" placeholder="e.g. 850" data-preview="rainfall" min="0" step="10">
+              <span class="hint">Leave blank if unknown — we'll score conservatively.</span>
+            </div>
+            <div class="field">
+              <label for="temp">Average temperature (°C)</label>
+              <input type="number" id="temp" name="temp" placeholder="e.g. 27" data-preview="temp" min="-5" max="55" step="1">
+              <span class="hint">Growing-season average, not today's forecast.</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="ph">Soil pH <span class="slider-value" id="ph-value">6.5</span></label>
+            <div class="slider-field">
+              <input type="range" id="ph" name="ph" min="4" max="9" step="0.1" value="6.5" data-preview="ph">
+            </div>
+            <span class="hint">Most crops prefer 6.0–7.5. A local soil test gives the most accurate reading.</span>
+          </div>
+        </div>
+
+        <!-- 3. Resources -->
+        <div class="field-group">
+          <div class="field-group-head">
+            <span class="num">3</span><h3>Resources on hand</h3>
+            <span>Required</span>
+          </div>
+          <div class="field">
+            <label>Soil nitrogen level</label>
+            <div class="pill-select" data-pill-group="nitrogen">
+              {% for n in nitros %}
+              <button type="button" class="pill-option {% if n == 'medium' %}active{% endif %}" data-value="{{ n }}">{{ n|capitalize }}</button>
+              {% endfor %}
+            </div>
+            <input type="hidden" name="nitrogen" id="nitrogen-input" value="medium" data-preview="nitrogen">
+          </div>
+          <div class="field" style="margin-top:20px;">
+            <label>Water availability</label>
+            <div class="pill-select" data-pill-group="water">
+              {% for w in waters %}
+              <button type="button" class="pill-option {% if w == 'partial' %}active{% endif %}" data-value="{{ w }}">{{ water_labels[w] }}</button>
+              {% endfor %}
+            </div>
+            <input type="hidden" name="water" id="water-input" value="partial" data-preview="water">
+          </div>
+        </div>
+
+        <!-- 4. Goal -->
+        <div class="field-group">
+          <div class="field-group-head">
+            <span class="num">4</span><h3>Your farm &amp; your goal</h3>
+            <span>Required</span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="farm_size">Farm size (acres) <span class="slider-value" id="farm-size-value">5</span></label>
+              <input type="range" id="farm_size" name="farm_size" min="0.5" max="50" step="0.5" value="5" data-preview="farm_size">
+            </div>
+            <div class="field">
+              <label for="goal">Primary goal</label>
+              <select id="goal" name="goal" data-preview="goal">
+                {% for g, label in goal_labels.items() %}
+                <option value="{{ g }}" {% if g == 'profit' %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary btn-lg">Run the analysis</button>
+          <span class="reassure">Takes a few seconds. Nothing is saved anywhere.</span>
+        </div>
+      </div>
+
+      <!-- Live preview sidebar -->
+      <aside class="preview-card">
+        <div class="preview-head">
+          <h4>Field profile</h4>
+        </div>
+        <div class="preview-mini-horizon">
+          <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 100 L40 55 C40 35 25 26 12 25 C12 45 25 58 40 55 C40 35 55 26 68 25 C68 45 55 58 40 55" stroke="#8FBF7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="preview-rows">
+          <div class="preview-row"><span class="k">Soil</span><span class="v" id="pv-soil">Loamy</span></div>
+          <div class="preview-row"><span class="k">Season</span><span class="v" id="pv-season">Kharif (Jun–Oct)</span></div>
+          <div class="preview-row"><span class="k">Rainfall</span><span class="v" id="pv-rainfall">Not set</span></div>
+          <div class="preview-row"><span class="k">Temperature</span><span class="v" id="pv-temp">Not set</span></div>
+          <div class="preview-row"><span class="k">pH</span><span class="v" id="pv-ph">6.5</span></div>
+          <div class="preview-row"><span class="k">Nitrogen</span><span class="v" id="pv-nitrogen">Medium</span></div>
+          <div class="preview-row"><span class="k">Water</span><span class="v" id="pv-water">Partial Irrigation</span></div>
+          <div class="preview-row"><span class="k">Farm size</span><span class="v" id="pv-farm_size">5 acres</span></div>
+          <div class="preview-row"><span class="k">Goal</span><span class="v" id="pv-goal">High Profit</span></div>
+        </div>
+        <div class="preview-tip" id="preview-tip">
+          <b>Tip —</b> Kharif season (June–October) suits water-loving crops like rice, maize, and cotton, timed with the monsoon.
+        </div>
+      </aside>
+
+    </form>
+  </div>
+</section>
+
+{% endblock %}
+{% block extra_scripts %}
+<script>document.body.dataset.page = "form";</script>
+{% endblock %}
